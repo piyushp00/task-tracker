@@ -1,46 +1,34 @@
 <template>
   <div class="container">
-    <Header title="Task Tracker" />
-    <Tasks :tasks="tasks" />
+    <Header
+      @toggle-add-task="toggleAddTask"
+      title="Task Tracker"
+      :toggleButtonColor="showAddTask"
+    />
+    <router-view :showAddTask="showAddTask"></router-view>
+    <Footer />
   </div>
 </template>
 
 <script>
 import Header from "./components/Header";
-import Tasks from "./components/Tasks";
+import Footer from "./components/Footer";
 
 export default {
   name: "App",
   components: {
     Header,
-    Tasks,
+    Footer,
   },
   data() {
     return {
-      tasks: [],
+      showAddTask: false,
     };
   },
-  created() {
-    this.tasks = [
-      {
-        id: 1,
-        text: "Doctors Appointment",
-        day: "March 1st at 2:30pm",
-        reminder: true,
-      },
-      {
-        id: 2,
-        text: "Doctors Appointment",
-        day: "March 1st at 2:30pm",
-        reminder: true,
-      },
-      {
-        id: 3,
-        text: "Doctors Appointment",
-        day: "March 1st at 2:30pm",
-        reminder: false,
-      },
-    ];
+  methods: {
+    toggleAddTask() {
+      this.showAddTask = !this.showAddTask;
+    },
   },
 };
 </script>
